@@ -1,10 +1,13 @@
+import React from "react"; 
 import './App.css';
+import MapViewer from "./MapViewer";
 
 function App() {
   return (
     <div className="App">
       <h1>hier oefenen !</h1>
-    </div>
+      <MapViewer/>
+      </div>
   );
 }
 
