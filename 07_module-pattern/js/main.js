@@ -1,6 +1,4 @@
-var MAINAPP = MAINAPP || {};
-
-(function(nsp) {
+ var MAINAPP = (function(nsp) {
 
     /*
     DOM Functionality
@@ -154,5 +152,11 @@ var MAINAPP = MAINAPP || {};
     domReady(function() {
         initQuiz();
     });
+
+    // public methods and properties
+    nsp.displayFeedback = displayFeedback;
+    nsp.$ = $;
+
+    return nsp;
     
-})(MAINAPP);
+})(MAINAPP || {});
