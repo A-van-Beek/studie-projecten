@@ -3,39 +3,39 @@
 
 const SPY_INTERVAL = 100;
 
-interface SpyItem {
-  inView: boolean;
-  element: HTMLElement;
-}
+// interface SpyItem {
+//   inView: boolean;
+//   element: HTMLElement;
+// }
 
- interface ScrollspyProps {
-  ids: string[];
-  offset: number;
-  itemContainerClassName?: string;
-  activeItemClassName?: string;
-  itemClassName?: string;
-}
+//  interface ScrollspyProps {
+//   ids: string[];
+//   offset: number;
+//   itemContainerClassName?: string;
+//   activeItemClassName?: string;
+//   itemClassName?: string;
+// }
 
-interface ScrollspyState {
-  items: SpyItem[];
-}
+// interface ScrollspyState {
+//   items: SpyItem[];
+// }
 
 
-class Scrollspy extends React.Component<ScrollspyProps, ScrollspyState> {
-   constructor(props: any) {
+class Scrollspy extends React.Component {
+   constructor(props) {
     super(props);
     this.state = {
       items: []
     };
   }
   
-  public static defaultProps: Partial<ScrollspyProps> = {
+  defaultProps = {
     offset: 2
   };
      
-  private timer: number;
+  timer;
 
-  private spy() {
+  spy() {
     const items = this.props.ids
       .map(id => {
         const element = document.getElementById(id);
@@ -43,7 +43,7 @@ class Scrollspy extends React.Component<ScrollspyProps, ScrollspyState> {
           return {
             inView: this.isInView(element),
             element
-          } as SpyItem;
+          };
         } else {
           return;
         }
@@ -56,22 +56,22 @@ class Scrollspy extends React.Component<ScrollspyProps, ScrollspyState> {
       return; // dont update state
     } else {
       const update = items.map(item => {
-        return { ...item, inView: item === firstTrueItem } as SpyItem;
+        return { ...item, inView: item === firstTrueItem };
       });
 
       this.setState({ items: update });
     }
   }
 
-  public componentDidMount() {
+  componentDidMount() {
     this.timer = window.setInterval(() => this.spy(), SPY_INTERVAL);
   }
 
-  public componentWillUnmount() {
+  componentWillUnmount() {
     window.clearInterval(this.timer);
   }
 
-  private isInView = (element: HTMLElement) => {
+  isInView = (element) => {
     if (!element) {
       return false;
     }
@@ -81,7 +81,7 @@ class Scrollspy extends React.Component<ScrollspyProps, ScrollspyState> {
     return rect.top >= 0 - offset && rect.bottom <= window.innerHeight + offset;
   };
 
-  private scrollTo(element: HTMLElement) {
+  scrollTo(element) {
     element.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -89,7 +89,7 @@ class Scrollspy extends React.Component<ScrollspyProps, ScrollspyState> {
     });
   }
 
-  private spy() {
+  spy() {
     const items = this.props.ids
       .map(id => {
         const element = document.getElementById(id);
@@ -97,7 +97,7 @@ class Scrollspy extends React.Component<ScrollspyProps, ScrollspyState> {
           return {
             inView: this.isInView(element),
             element
-          } as SpyItem;
+          };
         } else {
           return;
         }
@@ -110,14 +110,14 @@ class Scrollspy extends React.Component<ScrollspyProps, ScrollspyState> {
       return; // dont update state
     } else {
       const update = items.map(item => {
-        return { ...item, inView: item === firstTrueItem } as SpyItem;
+        return { ...item, inView: item === firstTrueItem };
       });
 
       this.setState({ items: update });
     }
   }
   
-  public render() {
+  render() {
     const {
       itemContainerClassName,
       activeItemClassName,
