@@ -1,12 +1,12 @@
 import React from "react";
 
 
-const TabLists = ({ contentItems, addSelectedTopic }) => {
+const TabLists = ({ contentItems, addSelectedTopic, tabId }) => {
   const listItems = contentItems.map((item) => (
     <li key={item.idItem}>
       <input id="check_" type="checkbox" onChange={(e) => {
         e.stopPropagation();
-        addSelectedTopic(e, item.idItem)
+        addSelectedTopic(e, tabId, item.idItem)
       }}/>
       <label> {item.annotatieTitle}</label>
     </li>

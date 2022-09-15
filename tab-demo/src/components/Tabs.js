@@ -1,48 +1,40 @@
-import React, { useState } from "react";
-import {dataTabs} from "./dataTabs"
+import React, { useEffect, useState } from "react";
+import { dataTabs } from "./dataTabs";
 import TabLists from "./TabLists";
 
 const Tabs = () => {
   const [currentTab, setCurrentTab] = useState("tab-1");
-  const [selectedTab1, setSelectedTab1] = useState([]);
-
-
-/** 
- * TODO
- * useState([ {tab 1: [1,2,3,4]}, {} ])
- * 
- * state uitbreiden volgens opzet: [tab-id: {geselecteerde onderwerp-id's}]
- *                  state betere naam geven
- *                  add/remove selected topic hierop aanpassen
- * op basis van deze nieuwe state een teller introduceren (lengte array items) + 
- *                  kleuring tabblad toevoegen
- * knoppen filter verwijderen toevoegen per tab en voor totale selectie
- * knop toevoegen voor run filter
- * overzetten naar viewer
- * 
- * inspiratie:      https://mui.com/material-ui/react-tabs/
- * code gebruikt:   https://rojaslabs.github.io/react-simple-tabs/
- *                  https://github.com/rojaslabs/react-simple-tabs
- * nakijken:        https://dev.to/andyrewlee/cheat-sheet-for-updating-objects-and-arrays-in-react-state-48np
- * 
- * 
-*/
-
+  const [filterLists, setFilterLists] = useState(undefined)
+  const [activeFilters, setActiveFilters] = useState ([])
+      // [{tabName: "tab-1", filterList: [1,2]}]
+ 
+useEffect(() => {
+  setFilterLists(dataTabs)
+})
 
   const handleTabClick = (e) => {
     setCurrentTab(e.target.id);
-    console.log("currentTab", currentTab)
-    console.log("geklikt op", e.target)
+    // console.log("currentTab", currentTab)
+    // console.log("geklikt op", e.target)
   };
 
-  function addSelectedTopic(e, id) {
-    const { checked } = e.target;
-    if (checked) {
-        setSelectedTab1(prev => [...prev, id])
-    } else {
-        setSelectedTab1(prev => prev.filter(x => x !== id))
-    }
-    console.log("state selectedTab1", selectedTab1)
+  function addSelectedTopic(e, tabId, id) {
+    setChecked(tabId, id)
+
+    };
+
+  function setChecked(tabId, id) {
+    //zoek index-nummer van het tabblad
+    let filterIndex = filterLists.findIndex((x) => x.id === tabId);
+    //zoek index-nummer van het item/onderwerp
+    let itemIndex = filterLists[filterIndex].contentItems.findIndex((i) => i.idItem === id);
+    let itemChecked = filterLists[filterIndex].contentItems[itemIndex];
+    //toggle checkbox
+    let tmpArray = [
+      ...filterLists,
+      (itemChecked.checked = !itemChecked.checked)
+    ];
+    setFilterLists(tmpArray);
   }
 
   return (
@@ -66,7 +58,11 @@ const Tabs = () => {
               <div>
                 <p className="title">{tab.title}</p>
                 <p>{tab.content}</p>
-                <TabLists contentItems={tab.contentItems} addSelectedTopic={addSelectedTopic}/>
+                <TabLists
+                  contentItems={tab.contentItems}
+                  addSelectedTopic={addSelectedTopic}
+                  tabId={tab.id}
+                />
               </div>
             )}
           </div>
