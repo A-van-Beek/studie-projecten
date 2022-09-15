@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { dataTabs } from "./dataTabs";
 import TabLists from "./TabLists";
-import Counter from "./Counter";
+import {Counter} from "./Counters";
 
 const Tabs = () => {
   const [currentTab, setCurrentTab] = useState("tab-1");
