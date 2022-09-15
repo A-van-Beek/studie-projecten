@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { dataTabs } from "./dataTabs";
 import TabLists from "./TabLists";
-import {Counter} from "./Counters";
+import {Counter, TabCounter} from "./Counters";
 
 const Tabs = () => {
   const [currentTab, setCurrentTab] = useState("tab-1");
@@ -68,6 +68,7 @@ const Tabs = () => {
             onClick={handleTabClick}
           >
             {tab.tabTitle}
+            <TabCounter filterLists={filterLists} activeFilters={activeFilters}/>
           </button>
         ))}
       </div>
@@ -88,7 +89,7 @@ const Tabs = () => {
           </div>
         ))}
       </div>
-      <div>U hebt <Counter activeFilters={activeFilters}/> filter(s) gezet.</div>
+      <Counter activeFilters={activeFilters}/>
       <button onClick={() => handleSubmitFilter()}>zoek met filter</button>
     </div>
   );
