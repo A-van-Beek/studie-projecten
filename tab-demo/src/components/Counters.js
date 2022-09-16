@@ -13,7 +13,10 @@ export const Counter = (props) => {
   }
 };
 
-export const TabCounter = () => {
-  console.log("TabCounter");
-  return;
+export const TabCounter = (props) => {
+    let tabId = props.tabId;
+    let activeFilters = props.activeFilters;
+    let filterLists = props.filterLists;
+    // console.log("filterLists", filterLists)
+  return <span> ({tabId})</span>;
 };
