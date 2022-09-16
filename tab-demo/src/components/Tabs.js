@@ -26,7 +26,7 @@ const Tabs = () => {
   console.log("state van counter", tabCounter)
 
   const handleSubmitFilter = () => {
-    console.log("zoekt....")
+    console.log("zoekt....", activeFilters)
     // console.log("zoeken op:", activeFilters)
   };
 
@@ -73,7 +73,6 @@ const Tabs = () => {
     setFilterLists(tmpArray);
   }
 
-  //to do: via aparte functie in één run zowel buttons maken als de content.
   return (
     <div className="container">
       <div className="tabs">
