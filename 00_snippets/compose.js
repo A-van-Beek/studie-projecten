@@ -1,8 +1,14 @@
+// =========================================================================
+// verschillende functies aan elkaar rijgen met compose
+// =========================================================================
+
 str = "Innovation distinguishes between a leader and a follower.";
 
-// manier 3: geplitst tot single tasks, tevens omgezet naar arrow functies.
+// =========================================================================
+// De functies zijn geplitst tot single tasks, tevens omgezet naar arrow functies.
 // let op: eerste functie heb ik nog uitgeschreven
-// pm: arrowfunction: let myFunction = (a, b) => a * b;
+// pro memorie: arrowfunction: let myFunction = (a, b) => a * b;
+// =========================================================================
 
 const trim = function (str) {
   return str.replace(/^\s*|\s*$/g, "");
@@ -32,4 +38,3 @@ const prepareString = compose(
 );
 
 // console.log("prepareString", prepareString(str));
-
