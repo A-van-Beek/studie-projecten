@@ -1,6 +1,10 @@
 import './App.css';
 import React from "react";
+import ReactDOM from "react-dom";
+import { makeAutoObservable } from "mobx";
+import { observer } from "mobx-react";
 import ToDoStore from './ToDoStore';
+import ToDoObservable from './ToDoObservable';
 
 function App() {
   return (
