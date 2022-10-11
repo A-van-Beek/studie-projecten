@@ -1,0 +1,82 @@
+class Model {
+  constructor() {
+    this.a = 0
+    this.b = 0
+  }
+  
+  get count() {
+    return this.a + this.b
+  }
+  
+  incrementA() {
+    this.a += 1
+  }
+  
+  incrementB() {
+    this.b += 100
+  }
+}
+
+mobx.decorate(Model, {
+  a: mobx.observable,
+  b: mobx.observable,
+  count: mobx.computed,
+  
+  incrementA: mobx.action.bound,
+  incrementB: mobx.action.bound,
+})
+
+
+class VariableComponent extends React.PureComponent {
+  render() {
+    return (
+      <span>
+        <span>
+          {this.props.name}
+        </span>
+        <span>
+          {`(${this.props.value})`}
+        </span>
+      </span>
+    )
+  }
+}
+
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <div>
+          <VariableComponent
+            name="A"
+            value={this.props.model.a}
+          />
+          {' + '}
+          <VariableComponent
+            name="B"
+            value={this.props.model.b}
+          />
+          {' = '}
+        </div>
+        <div>
+          {this.props.model.count}
+        </div>
+        <button type="button" onClick={this.props.model.incrementA}>
+          {'A += 1'}
+        </button>
+        <button type="button" onClick={this.props.model.incrementB}>
+          {'B += 100'}
+        </button>
+      </div>
+    )
+  }
+}
+
+mobxReact.observer(App)
+
+
+const model = new Model()
+
+
+ReactDOM.render(<App model={model}/>, document.body)
