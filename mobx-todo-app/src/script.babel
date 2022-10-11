@@ -1,0 +1,131 @@
+const { Component, createRef } = React;
+const { observable, autorun } = mobx;
+const { observer } = mobxReact;
+
+var store = observable({
+	todos: [
+		{
+			id: "1571759209508",
+			title: "Learn Mobx",
+			completed: false
+		},
+		{
+			id: "1571759209509",
+			title: "Make Mobx Todo App",
+			completed: true
+		}
+	],
+
+	addTodo: function(todo) {
+		this.todos.push(todo);
+	},
+
+	completeTodo: function(id) {
+		this.todos = this.todos.map(todo => {
+			if (todo.id == id) {
+				todo.completed = !todo.completed;
+			}
+			return todo;
+		});
+	},
+
+	deleteTodo: function(id) {
+		this.todos = this.todos.filter(todo => {
+			return todo.id != id;
+		});
+	}
+});
+
+mobx.autorun(() => {
+	console.log(JSON.stringify(store.todos))
+})
+
+const TodoApp = observer(
+	class TodoApp extends Component {
+
+		addTodo = e => {
+			const newTitle = this.refs.textInput.value;
+
+			if (newTitle.length === 0) {
+				return;
+			}
+
+			this.props.store.addTodo({
+				id: Date.now(),
+				title: newTitle,
+				completed: false
+			});
+
+			this.refs.textInput.value = "";
+		};
+
+		render() {
+			return (
+				<div>
+					<h1>MobX Todo App</h1>
+					<div className="container">
+						<div className="input-section">
+							<input className="input-area" type="text" placeholder="Enter todo" ref="textInput"/>
+							<div className="add-btn" onClick={this.addTodo}>
+								<i className="fas fa-plus-circle" />
+							</div>
+						</div>
+						<TodoList store={this.props.store} />
+					</div>
+				</div>
+			);
+		}
+	}
+);
+
+const TodoList = observer(
+	class TodoList extends Component {
+		handleComplete = e => {
+			this.props.store.completeTodo(e.target.value);
+		};
+
+		handleDelete = e => {
+			this.props.store.deleteTodo(e.target.getAttribute("value"));
+		};
+
+		render() {
+			return (
+				<section className={`todo-list ${this.props.store.todos.length == 0 ? 'hidden' : ''} `}>
+					{this.props.store.todos.map(todo => 
+						<Todo
+							todo={todo}
+							handleComplete={this.handleComplete}
+							handleDelete={this.handleDelete}
+						/>
+					)}
+				</section>
+			);
+		}
+	}
+);
+
+const Todo = observer(
+	class Todo extends Component {
+		render() {
+			const { id, title, completed } = this.props.todo;
+			const {handleComplete, handleDelete} = this.props;
+
+			return (
+				<div className="todo">
+					<input
+						type="checkbox"
+						checked={completed}
+						onChange={handleComplete}
+						value={id}
+					/>
+					<span className={`title ${completed ? "completed" : ""}`}>{title}</span>
+					<span className="delete-btn">
+						<i className="far fa-trash-alt" onClick={handleDelete} value={id}/>
+					</span>
+				</div>
+			);
+		}
+	}
+);
+
+ReactDOM.render(<TodoApp store={store} />, document.getElementById("todo-app"));
