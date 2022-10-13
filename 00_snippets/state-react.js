@@ -47,3 +47,17 @@ const countSelectedItems = (tabId, item) => {
    * voor arrays: [...arrayNaam]
    * 
   ================================== */
+
+    /** ==================================
+   * voorbeeld vanuit video: https://www.youtube.com/watch?v=GGo3MVBFr1A&ab_channel=WebDevSimplified
+   * 
+  ================================== */
+
+  const [count, setCount] = useState(0);
+
+  function adjustCount(amount) {
+    setCount(currentCount => {
+      return currentCount + amount
+    })
+  }
+
