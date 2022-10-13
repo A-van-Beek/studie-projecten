@@ -42,7 +42,36 @@ export default function App() {
 
   const toggleSelected = action((item) => {
     item.selected = !item.selected;
+    const updateChildren = item => {
+      item.children?.forEach(child => {
+        child.selected = item.selected;
+        updateChildren(child);
+      })
+    };
+
+    updateChildren(item);
+
+    const parents = new Map();
+
+    const findParents = (item) => {
+      item.children?.forEach(child => {
+        parents.set(child, item);
+        findParents(child);
+      });
+    };
+
+    tree.forEach(findParents);
+
+    let parent = parents.get(item);
+    while (parent) {
+      if (!item.selected && parent.children.find(child => child.selected)) {
+        break;
+      }
+      parent.selected = item.selected;
+      parent = parents.get(parent);
+    }
   });
+
 
   return (
     <div className="App">
