@@ -38,9 +38,14 @@ export default class TreeStore {
       value: observable,
 
       reset: action,
-      addElement: action,
-      setSelectedAll: action,
-      setExpandedAll: action,
+      add: action,
+
+      selectAll: action,
+      deselectAll: action,
+
+      expandAll: action,
+      unexpandAll: action,
+
       toggleExpanded: action,
       toggleSelected: action,
     });
@@ -50,37 +55,7 @@ export default class TreeStore {
     this.value.splice(0);
   }
 
-  addElement() {
-    const count = this.value.length;
-
-    const newItem = {
-      title: `Item ${count}`,
-      children: [
-        {
-          title: `Item ${count}.A`,
-          children: [
-            {
-              title: `Item ${count}.A.I`,
-              value: "Hello, world! (0)",
-            },
-            {
-              title: `Item ${count}.A.II`,
-              children: [
-                {
-                  title: `Item ${count}.A.II.a`,
-                  value: "Hello, world! (1)",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          title: `Item ${count}.B`,
-          value: "Hello, world! (2)",
-        },
-      ],
-    };
-
+  add(newItem) {
     this.value.push(new TreeItem(newItem));
   }
 
@@ -93,16 +68,20 @@ export default class TreeStore {
     this.value.forEach(visit);
   }
 
-  setSelectedAll(value) {
-    this.#forAllItems((item) => (item.selected = value));
+  selectAll() {
+    this.#forAllItems((item) => (item.selected = true));
   }
 
-  setExpandedAll(value) {
-    this.#forAllItems((item) => {
-      if (item.children) {
-        item.expanded = value;
-      }
-    });
+  deselectAll() {
+    this.#forAllItems((item) => (item.selected = false));
+  }
+
+  expandAll() {
+    this.#forAllItems((item) => (item.expanded = !!item.children));
+  }
+
+  unexpandAll() {
+    this.#forAllItems((item) => (item.expanded = false));
   }
 
   toggleExpanded(item) {
@@ -121,22 +100,12 @@ export default class TreeStore {
 
     updateChildren(item);
 
-    const parents = new Map();
-
-    const findParents = (item) => {
-      item.children?.forEach((child) => {
-        parents.set(child, item);
-        findParents(child);
-      });
-    };
-
-    this.value.forEach(findParents);
-
     let parent = item.parent;
     while (parent) {
       if (!item.selected && parent.children.find((child) => child.selected)) {
         break;
       }
+
       parent.selected = item.selected;
       parent = parent.parent;
     }

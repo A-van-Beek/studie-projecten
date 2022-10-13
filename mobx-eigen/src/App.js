@@ -1,24 +1,58 @@
+import { observer } from "mobx-react-lite";
 import Tree from "./Tree";
 import List from "./List";
 import Values from "./Values";
 import "./App.css";
 
-function App({tree}) {
+function App({ tree }) {
+  const add = () => {
+    const count = tree.value.length;
+
+    const newItem = {
+      title: `Item ${count}`,
+      children: [
+        {
+          title: `Item ${count}.A`,
+          children: [
+            {
+              title: `Item ${count}.A.I`,
+              value: "Hello, world! (0)",
+            },
+            {
+              title: `Item ${count}.A.II`,
+              children: [
+                {
+                  title: `Item ${count}.A.II.a`,
+                  value: "Hello, world! (1)",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          title: `Item ${count}.B`,
+          value: "Hello, world! (2)",
+        },
+      ],
+    };
+
+    tree.add(newItem);
+  };
 
   return (
     <div className="App">
       <h1>Demo MobX Tree</h1>
       <button onClick={() => tree.reset()}>Reset</button>
-      <button onClick={() => tree.addElement()}>Add element</button>
-      <button onClick={() => tree.setSelectedAll(true)}>Select all</button>
-      <button onClick={() => tree.setSelectedAll(false)}>Deselect all</button>
-      <button onClick={() => tree.setExpandedAll(true)}>Expand all</button>
-      <button onClick={() => tree.setExpandedAll(false)}>Unexpand all</button>
+      <button onClick={add}>Add element</button>
+      <button onClick={() => tree.selectAll()}>Select all</button>
+      <button onClick={() => tree.deselectAll()}>Deselect all</button>
+      <button onClick={() => tree.expandAll()}>Expand all</button>
+      <button onClick={() => tree.unexpandAll()}>Unexpand all</button>
       <h2>tree</h2>
       <Tree
         data={tree.value}
-        toggleExpanded={item => tree.toggleExpanded(item)}
-        toggleSelected={item => tree.toggleSelected(item)}
+        toggleExpanded={(item) => tree.toggleExpanded(item)}
+        toggleSelected={(item) => tree.toggleSelected(item)}
       />
       <h2>selected</h2>
       <List data={tree.value} />
@@ -28,4 +62,4 @@ function App({tree}) {
   );
 }
 
-export default App;
+export default observer(App);
