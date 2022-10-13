@@ -78,7 +78,7 @@ export default class TreeStore {
     this.value.push(newItem);
   }
 
-  forAllItems(f) {
+  #forAllItems(f) {
     const visit = (item) => {
       f(item);
       item.children?.forEach(visit);
@@ -88,11 +88,11 @@ export default class TreeStore {
   }
 
   setSelectedAll(value) {
-    this.forAllItems((item) => (item.selected = value));
+    this.#forAllItems((item) => (item.selected = value));
   }
 
   setExpandedAll(value) {
-    this.forAllItems(item => {
+    this.#forAllItems(item => {
         if (item.children) {
             item.expanded = value;
         }
