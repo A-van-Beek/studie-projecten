@@ -1,5 +1,6 @@
 import { observable, action } from "mobx";
 import Tree from "./Tree";
+import List from "./List";
 import "./App.css";
 
 export default function App() {
@@ -42,11 +43,11 @@ export default function App() {
 
   const toggleSelected = action((item) => {
     item.selected = !item.selected;
-    const updateChildren = item => {
-      item.children?.forEach(child => {
+    const updateChildren = (item) => {
+      item.children?.forEach((child) => {
         child.selected = item.selected;
         updateChildren(child);
-      })
+      });
     };
 
     updateChildren(item);
@@ -54,7 +55,7 @@ export default function App() {
     const parents = new Map();
 
     const findParents = (item) => {
-      item.children?.forEach(child => {
+      item.children?.forEach((child) => {
         parents.set(child, item);
         findParents(child);
       });
@@ -64,7 +65,7 @@ export default function App() {
 
     let parent = parents.get(item);
     while (parent) {
-      if (!item.selected && parent.children.find(child => child.selected)) {
+      if (!item.selected && parent.children.find((child) => child.selected)) {
         break;
       }
       parent.selected = item.selected;
@@ -72,16 +73,18 @@ export default function App() {
     }
   });
 
-
   return (
     <div className="App">
       <h1>Demo MobX Tree</h1>
+      <button onClick={addElement}>Add element</button>
+      <h2>tree</h2>
       <Tree
         data={tree}
         toggleExpanded={toggleExpanded}
         toggleSelected={toggleSelected}
       />
-      <button onClick={addElement}>Add element</button>
+      <h2>selected</h2>
+      <List data={tree} />
     </div>
   );
 }
