@@ -48,7 +48,10 @@ const countSelectedItems = (tabId, item) => {
    * 
   ================================== */
 
-    /** ==================================
+
+
+
+  /** ==================================
    * voorbeeld vanuit video: https://www.youtube.com/watch?v=GGo3MVBFr1A&ab_channel=WebDevSimplified
    * 
   ================================== */
@@ -60,4 +63,14 @@ const countSelectedItems = (tabId, item) => {
       return currentCount + amount
     })
   }
+
+  // NB indien je met een console/log het effect wilt zien, dan moet je wachten
+  // tot de component opnieuw gerenderd wordt.
+  // oplossing:
+
+  useEffect(() => {
+    console.log(count)
+  }, [count])
+  
+
 
