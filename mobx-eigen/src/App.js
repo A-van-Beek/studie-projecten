@@ -6,6 +6,11 @@ import "./App.css";
 
 function App() {
   const tree = observable([]);
+
+  const reset = action(() => {
+    tree.splice(0);
+  });
+
   const addElement = action(() => {
     const count = tree.length;
     const newItem = {
@@ -38,6 +43,20 @@ function App() {
 
     tree.push(newItem);
   });
+
+  const forAllItems = f => {
+    const visit = item => {
+      f(item);
+      item.children?.forEach(visit);
+    };
+
+    tree.forEach(visit);
+  }
+
+  const setSelectedAll = action(value => forAllItems(item => item.selected = value));
+
+  const setExpandedAll = action(value => forAllItems(item => item.expanded = value));
+
   const toggleExpanded = action((item) => {
     item.expanded = !item.expanded;
   });
@@ -70,7 +89,12 @@ function App() {
   return (
     <div className="App">
       <h1>Demo MobX Tree</h1>
+      <button onClick={reset}>Reset</button>
       <button onClick={addElement}>Add element</button>
+      <button onClick={() => setSelectedAll(true)}>Select all</button>
+      <button onClick={() => setSelectedAll(false)}>Deselect all</button>
+      <button onClick={() => setExpandedAll(true)}>Expand all</button>
+      <button onClick={() => setExpandedAll(false)}>Unexpand all</button>
       <h2>tree</h2>
       <Tree
         data={tree}
