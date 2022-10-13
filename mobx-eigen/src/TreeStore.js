@@ -85,7 +85,7 @@ export default class TreeStore {
   }
 
   toggleExpanded(item) {
-    item.expanded = !item.expanded;
+    item.expanded = item.children && !item.expanded;
   }
 
   toggleSelected(item) {
