@@ -1,3 +1,16 @@
+//de useState-hook kan alleen gebruikt worden in een functionele component.
+//dus:
+// export default function App() {
+//   return (
+//     <div>blabla</div>
+//   )
+// }
+
+// en niet:
+// class App extends React.Component{
+
+// }
+
 import React from "react";
 
 const [filterLists, setFilterLists] = useState([
