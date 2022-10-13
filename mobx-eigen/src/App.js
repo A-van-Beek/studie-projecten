@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import Tree from "./Tree";
 import List from "./List";
@@ -39,11 +40,21 @@ function App({ tree }) {
     tree.add(newItem);
   };
 
+  const [amount, setAmount] = useState(10);
+
+  const addMany = () => {
+    for (let i = 0; i < amount; i++) {
+      add();
+    }
+  };
+
   return (
     <div className="App">
       <h1>Demo MobX Tree</h1>
       <button onClick={() => tree.reset()}>Reset</button>
-      <button onClick={add}>Add element</button>
+      <button onClick={add}>Add single element</button>
+      <input type="text" value={amount} onChange={e => setAmount(e.target.value)}/>
+      <button onClick={addMany}>Add many elements</button>
       <button onClick={() => tree.selectAll()}>Select all</button>
       <button onClick={() => tree.deselectAll()}>Deselect all</button>
       <button onClick={() => tree.expandAll()}>Expand all</button>
