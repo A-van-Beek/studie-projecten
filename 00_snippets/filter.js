@@ -7,4 +7,4 @@ let newFilterArray = arr.filter(function(val) {
     return val < 3
 })
 
-console.log("newFilterArray", newFilterArray)
+// console.log("newFilterArray", newFilterArray)
