@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+  color: red;
+  margin-left: 10px;
+}
+
+.test {
+  background-color: var(--my-var, red);;
+}
+
+.blok-1, 
+.blok-2,
+.blok-3,
+.blok-4 {
+  width: 25px;
+  height: 25px;
+  border: solid 1px;
+}
+
+.blok-1 {
+  background-color: var(--PV_PURPLE);
+}
