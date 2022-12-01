@@ -1,12 +1,49 @@
 @startuml plantuml-snippet
-' zie blogpost: https://blog.mrhaki.com/2018/06/plantuml-pleasantness-using-aws-font.html
-' alle posts van plantUML: https://blog.mrhaki.com/search?q=plantuml
+' kleine hulpsnippets en extra uitleg
+/'
+=========================================
+COMMMENT LINES in code
 
-/' To use an icon from the icon set we must include the icon using
+' enkele line
+
+
+/' 
+multiple comment lines in de code
+'/
+
+/' 
+=========================================
+NOTES / TIPS / COMMENTS in plaatje
+
+: ([[{} tip]])
+
+note top of SearchStore : Blabla on <b>top</b> of SearchStore.
+
+note right of SearchStore::resultsKenmerken
+    defenitie: Blabla
+end note
+
+note right of Struct::kop
+    defenitie: 
+end note
+
+=============================================
+
+als een attribuut als private beschouwd moet worden, gaat hieraan een rood blokje vooraf
+(dit is in code een -)
+
+
+=============================================
+Importeren van icoontjes (verder uitzoeken)
+
+zie blogpost: https://blog.mrhaki.com/2018/06/plantuml-pleasantness-using-aws-font.html
+alle posts van plantUML: https://blog.mrhaki.com/search?q=plantuml
+
+To use an icon from the icon set we must include the icon using
 the !include statement. In our PlantUML definition we reference
 the icon with the syntax <$iconName>. In the following example
 PlantUML definition we include 2 icons from the Font Awesome and
-Devicons icon sets: '/
+Devicons icon sets:
 
 ' We only include the icon files.
 !include <devicons/github>
@@ -23,4 +60,7 @@ rectangle gitlab [
 ]
 
 github -> gitlab : ~#movingtogitlab
+@enduml
+
+'/
 @enduml
