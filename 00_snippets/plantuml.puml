@@ -1,0 +1,26 @@
+@startuml plantuml-snippet
+' zie blogpost: https://blog.mrhaki.com/2018/06/plantuml-pleasantness-using-aws-font.html
+' alle posts van plantUML: https://blog.mrhaki.com/search?q=plantuml
+
+/' To use an icon from the icon set we must include the icon using
+the !include statement. In our PlantUML definition we reference
+the icon with the syntax <$iconName>. In the following example
+PlantUML definition we include 2 icons from the Font Awesome and
+Devicons icon sets: '/
+
+' We only include the icon files.
+!include <devicons/github>
+!include <font-awesome/gitlab>
+
+rectangle github [
+    ' Reference github icon with <$icon>.
+    <$github>
+]
+
+rectangle gitlab [
+    ' Reference gitlab icon with <$icon>.
+    <$gitlab>
+]
+
+github -> gitlab : ~#movingtogitlab
+@enduml
