@@ -11,12 +11,8 @@ function Form() {
 
   const onChange = (event) => setQuery(event.target.value);
 
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     console.log("hier", query);
-//   }
-
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     console.log("hier", query);
   }
 
@@ -26,16 +22,17 @@ function Form() {
 
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
     <div>Input value: {query}</div>
     <input placeholder="Type a value" value={query} onChange={onChange} />
-    <input type="submit" value="Submit !" onSubmit={handleSubmit()}/>
+    {/* <input type="submit" value="Submit !" onSubmit={handleSubmit()}/> */}
+    <button type="submit">Submit</button>
     <div className="list">
         {filteredEmployees.map((name, idx) => (
           <div key={idx}>{name}</div>
         ))}
       </div>
-  </>
+  </form>
   );
 }
 
