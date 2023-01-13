@@ -13,7 +13,9 @@ function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("hier", query);
+    
+    console.log("hier!!", query);
+    setQuery("")
   }
 
   const filteredEmployees = employees.filter((name) => {
