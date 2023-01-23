@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document</title>
+<style>
+   body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+   }
+   .result,
+   .sample {
+      font-size: 18px;
+      color: blueviolet;
+      font-weight: 500;
+   }
+   .sample {
+      color: red;
+   }
+</style>
+</head>
+<body>
+<h1>Touch events in JavaScript</h1>
+<div class="sample">Here is some sample text to touch</div>
+<div class="result"></div>
+<h3>Touch on the above paragraph to make output in the below paragraph visible</h3>
+<script>
+   let resEle = document.querySelector(".result");
+   let sampleEle = document.querySelector(".sample");
+   sampleEle.addEventListener("touchstart", () => {
+      resEle.innerHTML = "Touch start event has been triggered";
+   });
+</script>
+</body>
+</html>
