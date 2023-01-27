@@ -1,0 +1,42 @@
+:root {
+  --primary: blue;
+  --secundary: red;
+  --tertiary: white;
+  --accent-color: orange;
+
+  --primary-fallback-color: black;
+  --secundary-fallback-color: brown;
+  --tertiary-fallback-color: wheat;
+  --accent-fallback-color: rgb(98, 255, 0);
+
+
+}
+
+body {
+  background-color: var(--tertiary);
+}
+
+h2 {
+  border-bottom: 2px solid var(--primary);
+}
+
+.container {
+  color: var(--primary);
+  background-color: var(--tertiary);
+  padding: 15px;
+}
+
+.container button  {
+  background-color: var(--tertiary);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 5px;
+}
+
+.test_ternary {
+  color: red;
+  /* color: var(--accent-color, black); */
+  /* color: var(--nonexistent, purple); */
+  color: var(--nonexistent, var(--secundary-fallback-color))
+}
+
