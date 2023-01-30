@@ -1,0 +1,10 @@
+{
+    "styling": {
+        "global": {
+            "--theme-primary-color-light": "lightgrey",
+            "--theme-secondary-color-light": "wheat",
+            "--theme-primary-color-dark": "darkgreen",
+            "--theme-secondary-color-dark": "red"        
+        }
+    }
+}
