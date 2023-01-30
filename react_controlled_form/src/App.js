@@ -1,5 +1,6 @@
 import Form from "./components/Form";
 import LoginForm from "./components/Login";
+import Inputfield from "./components/Inputfield" 
 
 function App() {
   return (
@@ -8,6 +9,8 @@ function App() {
       <Form/>
       <hr/>
       <LoginForm/>
+      <hr/>
+      <Inputfield/>
     </div>
   );
 }

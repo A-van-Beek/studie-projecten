@@ -14,7 +14,7 @@ function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    console.log("hier!!", filteredEmployees);
+    // console.log("hier!!", filteredEmployees);
     setQuery("")
   }
 
