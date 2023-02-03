@@ -1,3 +1,7 @@
 h2 {
     color: var(--theme-secondary-color-dark)
 }
+
+.test {
+    background-color: var(--theme-non-exist-color, var(--fallback-color));
+}
