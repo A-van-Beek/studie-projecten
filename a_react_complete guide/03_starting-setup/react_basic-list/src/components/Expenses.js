@@ -3,15 +3,11 @@ import ExpenseItem from "./ExpenseItem";
 import Card from "./Card";
 
 function Expenses(props) {
-      return (
-        <Card className="expenses">
-            <ExpenseItem
-            title={props.expenses[0].title}
-            amount={props.expenses[0].amount}
-            date={props.expenses[0].date}
-            />
-        </Card>
-      )
+  console.log("props", props);
+  const content = props.expenses.map((item) => (
+    <ExpenseItem title={item.title} amount={item.amount} date={item.date} />
+  ));
+  return <Card className="expenses">{content}</Card>;
 }
 
 export default Expenses;
