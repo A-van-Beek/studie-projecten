@@ -8,7 +8,7 @@ export class App extends React.PureComponent {
 
     this.state = {
       counter: 0,
-      showWindowPortal: false,
+      showWindowPortal: false
     };
 
     this.toggleWindowPortal = this.toggleWindowPortal.bind(this);
@@ -20,17 +20,17 @@ export class App extends React.PureComponent {
       this.closeWindowPortal();
     });
 
-    window.setInterval(() => {
-      this.setState((state) => ({
-        // counter: state.counter + 1
-      }));
-    }, 1000);
+    // window.setInterval(() => {
+    //   this.setState(state => ({
+    //     counter: state.counter + 1
+    //   }));
+    // }, 1000);
   }
 
   toggleWindowPortal() {
-    this.setState((state) => ({
+    this.setState(state => ({
       ...state,
-      showWindowPortal: !state.showWindowPortal,
+      showWindowPortal: !state.showWindowPortal
     }));
   }
 
@@ -44,7 +44,7 @@ export class App extends React.PureComponent {
         <h1>Counter: {this.state.counter}</h1>
 
         <button onClick={this.toggleWindowPortal}>
-          {this.state.showWindowPortal ? "Close the" : "Open a"} portal
+          {this.state.showWindowPortal ? "Close the" : "Open a"} Portal
         </button>
 
         {this.state.showWindowPortal && (

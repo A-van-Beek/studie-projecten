@@ -1,6 +1,6 @@
 export function copyStyles(sourceDoc, targetDoc) {
     Array.from(sourceDoc.styleSheets).forEach(styleSheet => {
-        console.log("styleSheet", styleSheet)
+        // console.log("styleSheet", styleSheet)
       if (styleSheet.cssRules) {
         // true for inline styles
         const newStyleEl = sourceDoc.createElement("style");
