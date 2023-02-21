@@ -49,7 +49,8 @@ export class App extends React.PureComponent {
 
         {this.state.showWindowPortal && (
           <DepWindow closeWindowPortal={this.closeWindowPortal}>
-            <h1>Counter in a portal: {this.state.counter}</h1>
+            {/* <h1>Counter in a portal: {this.state.counter}</h1> */}
+            <h1>hier is de inhoud van het portal</h1>
             <p>Even though I render in a different window, I share state!</p>
 
             <button onClick={this.closeWindowPortal}>Close me!</button>
