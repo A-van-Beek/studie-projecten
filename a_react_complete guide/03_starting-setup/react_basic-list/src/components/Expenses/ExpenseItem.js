@@ -8,7 +8,7 @@ const ExpenseItem = (props) => {
   const clickHandler = () => {
     console.log("geklikt !");
   }
-  
+
   return (
     <Card className="expense-item">
       <ExpenseDate date={props.date} />
@@ -16,7 +16,7 @@ const ExpenseItem = (props) => {
         <h2>{props.title}</h2>
         <div className="expense-item___price">$ {props.amount}</div>
       </div>
-      <button onCLick={clickHandler}>Change title</button>
+      <button onClick = {clickHandler}>Change title</button>
     </Card>
   );
 }
