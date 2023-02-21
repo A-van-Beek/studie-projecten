@@ -7,7 +7,6 @@ const DepWindow = () => {
         window.open("", "", "width=600,height=400,left=200,top=200")
       );
 
-
     const content2 = <div>hier tweede tekst DepWindow</div>
     
     return (
