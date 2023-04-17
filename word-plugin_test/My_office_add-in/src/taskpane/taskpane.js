@@ -16,8 +16,7 @@ async function insertParagraphStart() {
     // TODO1: Queue commands to insert a paragraph into the document.
     const docBody = context.document.body;
     //first parameter is de nieuwe tekst, tweede is de locatie (andere opties: "end" en "replace")
-    docBody.insertParagraph("En mijn eigen tekst aan de voorkant.",
-                            Word.InsertLocation.start);
+    docBody.insertParagraph("En mijn eigen tekst aan de voorkant.", Word.InsertLocation.start);
     await context.sync();
   });
 }
@@ -25,8 +24,7 @@ async function insertParagraphStart() {
 async function insertParagraphEnd() {
   await Word.run(async (context) => {
     const docBody = context.document.body;
-    docBody.insertParagraph("En mijn eigen tekst aan het einde.",
-                            Word.InsertLocation.end);
+    docBody.insertParagraph("En mijn eigen tekst aan het einde.", Word.InsertLocation.end);
     await context.sync();
   });
 }
