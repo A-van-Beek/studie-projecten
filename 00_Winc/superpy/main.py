@@ -51,6 +51,7 @@ StockLijst.append(product)
 csv_bestand = 'Inventaris.csv'
 
 # Schrijf de inhoud van de StockLijst naar het CSV-bestand
+## let op: bestand komt in hoofdmap studie-projecten ipv in submap 00_Winc/superpy
 with open(csv_bestand, 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['id', 'naam', 'inkoop_prijs', 'aantal'])  # Schrijf de kolomkoppen
