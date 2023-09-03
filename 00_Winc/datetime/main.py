@@ -5,7 +5,7 @@ tday = datetime.date.today()
 
 #time delta
 tdelta = datetime.timedelta(days=7)
-#print(tday + tdelta)
+# print(tday + tdelta)
 
 bday = datetime.date(2023, 8, 2)    #mijn verjaardag dit jaar
 # print(bday)
